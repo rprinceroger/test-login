@@ -10,10 +10,17 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://cors-anywhere.herokuapp.com/http://statistics-staging.viribuzmedia.com/umbraco/Api/ViribuzAgentAuth/SubmitLogin', {
-        username,
-        password
+      // Making the Axios GET request instead of POST
+      const response = await axios({
+        method: 'POST',
+        url: 'https://cors-anywhere.herokuapp.com/http://statistics-staging.viribuzmedia.com/umbraco/Api/ViribuzAgentAuth/SubmitLogin',
+        withCredentials: false,
+        params: {
+          username,
+          password
+        },
       });
+
       console.log(response.data);
       setMessage('Login successful');
     } catch (error) {
