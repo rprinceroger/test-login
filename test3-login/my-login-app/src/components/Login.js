@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -12,20 +11,20 @@ const Login = () => {
     const apiUrl = 'http://statistics-staging.viribuzmedia.com/umbraco/Api/ViribuzAgentAuth/SubmitLogin';
 
     try {
-      const response = await axios.post(apiUrl, {
-        username,
-        password,
-      }, {
-        withCredentials: false, // Setting withCredentials to false
+      const response = await fetch(apiUrl, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ username, password }),
+        credentials: 'same-origin',
       });
+      const data = await response.json();
       
-      if (response.status === 200) {
-        console.log('Login successful:', response.data);
+      if (response.ok) {
+        console.log('Login successful:', data);
       } else {
-        setError(response.data.message || 'Login failed. Please try again.');
+        setError(data.message || 'Login failed. Please try again.');
       }
     } catch (error) {
       setError('An error occurred. Please try again later.');
