@@ -7,23 +7,30 @@ const Login = () => {
   const [token, setToken] = useState('');
 
 	const handleLogin = async () => {
-	  const url = 'https://cors-anywhere.herokuapp.com/http://statistics-staging.viribuzmedia.com/umbraco/Api/ViribuzAgentAuth/SubmitLogin';
+	  try {
+	    const response = await fetch('http://statistics-staging.viribuzmedia.com/umbraco/Api/ViribuzAgentAuth/SubmitLogin', {
+	      method: 'POST',
+	      headers: {
+	        'Content-Type': 'application/json',
+	      },
+	      body: JSON.stringify({ username, password }),
+	    });
 
-	  const response = await fetch(url, {
-	    method: 'POST',
-	    headers: {
-	      'Content-Type': 'application/json',
-	    },
-	    body: JSON.stringify({ username, password }),
-	  });
+	    if (!response.ok) {
+	      throw new Error('Failed to fetch');
+	    }
 
-	  const data = await response.json();
+	    const data = await response.json();
 
-	  if (data.success) {
-	    setMessage(data.message);
-	    setToken(data.token);
-	  } else {
-	    setMessage('Login failed. Please try again.');
+	    if (data.success) {
+	      setMessage(data.message);
+	      setToken(data.token);
+	    } else {
+	      setMessage('Login failed. Please try again.');
+	    }
+	  } catch (error) {
+	    console.error('Error:', error.message);
+	    setMessage('Failed to fetch. Please check your network connection.');
 	  }
 	};
 
