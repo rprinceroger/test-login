@@ -1,0 +1,17 @@
+/*.violet-check .form-check-input:checked {
+    background-color: violet !important;
+    border-color: violet !important;
+}
+*/
+/* Add this CSS to your stylesheet */
+/* Override the default checkbox styles */
+/*.violet-check .form-check-input[type="checkbox"] {
+    background-color: transparent;
+    border-color: violet;
+}
+*/
+/* Override the default checked checkbox styles */
+/*.violet-check .form-check-input[type="checkbox"]:checked {
+    background-color: violet;
+    border-color: violet;
+}*/

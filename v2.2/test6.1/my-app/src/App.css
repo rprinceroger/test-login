@@ -1,0 +1,44 @@
+/* App.css */
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Move content to the right side */
+}
+
+.agents-container {
+  width: 50%; /* Consume 50% of the available space */
+}
+
+.agents-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.agent-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.agent-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  text-align: right;
+}
